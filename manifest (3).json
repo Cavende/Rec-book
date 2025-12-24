@@ -1,0 +1,11 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "cavende.github",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "cavende.github",
+  "start_url": "https://cavende.github.io/Rec-book/",
+  "theme_color": "#ffffff"
+}
