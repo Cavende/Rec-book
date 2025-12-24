@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FarmKeep Pro</title>
+    <title>Kamdhenu Gaushala</title>
     
     <link rel="manifest" href="/Rec-book/manifest.json">
     <meta name="theme-color" content="#ef6c00">
@@ -12,35 +12,53 @@
     <style>
         :root { --primary: #ef6c00; --accent: #2e7d32; --bg: #f4f7f6; --card-bg: #ffffff; --text: #212121; --danger: #d32f2f; --edit: #1976d2; }
         body { font-family: -apple-system, system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); }
-        header { background: var(--primary); color: white; padding: 1rem; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        
+        /* Updated Header Styling */
+        header { 
+            background: var(--primary); 
+            color: white; 
+            padding: 0.8rem; 
+            text-align: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+        header h1 { margin: 0; font-size: 1.5rem; }
+        header .subtitle { font-size: 0.85rem; font-weight: normal; opacity: 0.9; display: block; margin-top: 2px; }
+
         .container { padding: 15px; max-width: 600px; margin: auto; padding-bottom: 60px; }
         
+        /* Grid & Cards */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
         .cat-card { background: var(--card-bg); padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); cursor: pointer; border: 1px solid #ddd; position: relative; }
         .cat-card span { font-size: 2.2rem; display: block; margin-bottom: 5px; }
         .cat-card label { font-weight: bold; color: var(--primary); font-size: 0.9rem; }
         .count-badge { position: absolute; top: 8px; right: 8px; background: var(--text); color: white; border-radius: 50%; width: 22px; height: 22px; font-size: 0.75rem; line-height: 22px; font-weight: bold; }
 
-        .animal-card { background: var(--card-bg); padding: 12px; margin-bottom: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.05); cursor: pointer; }
-        .animal-card img { width: 50px; height: 50px; border-radius: 6px; object-fit: cover; margin-right: 12px; background: #eee; }
-        
-        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #bbb; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
-        label { font-weight: bold; font-size: 0.85rem; color: #555; display: block; margin-top: 10px; }
-        .photo-preview { width: 100%; height: 180px; background: #eee; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 2px dashed #ccc; margin-bottom: 10px; cursor: pointer; }
-        .photo-preview img { width: 100%; height: 100%; object-fit: cover; }
+        /* Tables */
+        .report-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; margin-top: 15px; }
+        .report-table th { background: var(--primary); color: white; padding: 12px; text-align: left; }
+        .report-table td { padding: 12px; border-bottom: 1px solid #eee; }
+        .total-row { background: #eee; font-weight: bold; }
 
-        .btn { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1rem; font-weight: bold; margin-top: 10px; display: block; text-align: center; }
-        .btn-back { background: #555; width: auto; padding: 8px 15px; margin-bottom: 15px; display: inline-block; font-size: 0.9rem; }
-        .btn-danger { background: var(--danger); }
-        .btn-edit { background: var(--edit); }
+        /* Common UI */
+        .animal-card { background: var(--card-bg); padding: 12px; margin-bottom: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.05); cursor: pointer; }
+        .animal-card img { width: 50px; height: 50px; border-radius: 6px; object-fit: cover; margin-right: 12px; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #bbb; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        .btn { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1rem; font-weight: bold; margin-top: 10px; display: block; text-align: center; text-decoration: none; }
         .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+        .btn-back { background: #555; width: auto; padding: 8px 15px; display: inline-block; margin-bottom: 15px; }
         .hidden { display: none; }
         .vax-section { background: #fff3e0; padding: 12px; border-radius: 8px; margin-top: 10px; border: 1px solid #ffe0b2; }
     </style>
 </head>
 <body>
 
-<header><h1>FarmKeep Pro</h1></header>
+<header>
+    <h1>Kamdhenu Gaushala</h1>
+    <span class="subtitle">(Shriram Shaktipith Sansthan)</span>
+</header>
 
 <div class="container">
     
@@ -55,10 +73,11 @@
             <div class="cat-card" onclick="showList('Doctor')"><div class="count-badge" id="count-Doctor">0</div><span>👨‍⚕️</span><label>Dr. Visits</label></div>
         </div>
 
-        <div style="margin-top:30px; border-top: 1px solid #ccc; padding-top: 20px;">
-            <button class="btn btn-outline" onclick="exportData()">📥 Download Data Backup</button>
+        <div style="margin-top:25px;">
+            <button class="btn" style="background:var(--accent)" onclick="showSummary()">📊 View Inventory Report</button>
+            <button class="btn btn-outline" onclick="exportData()">📥 Backup Data</button>
             <input type="file" id="importFile" class="hidden" accept=".json" onchange="importData(event)">
-            <button class="btn btn-outline" onclick="document.getElementById('importFile').click()">📤 Restore Data Backup</button>
+            <button class="btn btn-outline" onclick="document.getElementById('importFile').click()">📤 Restore Backup</button>
         </div>
     </div>
 
@@ -78,7 +97,6 @@
             <input type="hidden" id="photo-data">
 
             <div id="photo-area">
-                <label>Photo</label>
                 <div class="photo-preview" onclick="document.getElementById('fileInput').click()">
                     <span id="photo-prompt">📷 Click to add photo</span>
                     <img id="preview-img" class="hidden">
@@ -87,21 +105,21 @@
             </div>
 
             <div id="animal-fields">
-                <label>Animal Name</label><input type="text" id="name">
+                <label>Name</label><input type="text" id="name">
                 <label>Tag / ID</label><input type="text" id="tag">
                 <label>Breed</label><input type="text" id="breed">
                 <label>Sex</label>
-                <select id="sex"><option value="Female">Female</option><option value="Male">Male</option><option value="N/A">N/A</option></select>
+                <select id="sex"><option value="Female">Female</option><option value="Male">Male</option></select>
                 <div class="vax-section">
-                    <label style="margin-top:0">Vaccination Name</label><input type="text" id="vax_name">
-                    <label>Vaccination Date</label><input type="date" id="vax_date">
+                    <label>Vaccination</label><input type="text" id="vax_name" placeholder="Name">
+                    <input type="date" id="vax_date">
                 </div>
             </div>
 
             <div id="doctor-fields" class="hidden">
                 <label>Doctor Name</label><input type="text" id="doc_name">
-                <label>Visit Purpose</label><input type="text" id="visit_purpose">
-                <label>Visit Date</label><input type="date" id="visit_date">
+                <label>Purpose</label><input type="text" id="visit_purpose">
+                <label>Date</label><input type="date" id="visit_date">
             </div>
 
             <label>Notes</label><textarea id="notes" rows="3"></textarea>
@@ -109,29 +127,49 @@
         </form>
     </div>
 
+    <div id="view-summary" class="hidden">
+        <button class="btn btn-back" onclick="goToHome()">← Home</button>
+        <h2>Gaushala Inventory</h2>
+        <table class="report-table">
+            <thead><tr><th>Category</th><th style="text-align:right;">Count</th></tr></thead>
+            <tbody id="summary-body"></tbody>
+            <tfoot><tr class="total-row"><td>Total Livestock</td><td style="text-align:right;" id="total-count">0</td></tr></tfoot>
+        </table>
+        <button class="btn btn-outline" onclick="window.print()">🖨️ Print Report</button>
+    </div>
+
     <div id="view-details" class="hidden">
         <button class="btn btn-back" onclick="showView('view-list')">← Back</button>
         <div id="detail-card" style="background:white; padding:20px; border-radius:12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"></div>
-        <button class="btn btn-edit" id="edit-btn">✏️ Edit This Record</button>
-        <button class="btn btn-danger" id="delete-btn">🗑️ Delete Permanently</button>
+        <button class="btn" style="background:var(--edit)" id="edit-btn">✏️ Edit</button>
+        <button class="btn" style="background:var(--danger)" id="delete-btn">🗑️ Delete</button>
     </div>
 </div>
 
 <script>
-    // Offline Service Worker Registration
+    // 1. PWA Service Worker Registration
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/Rec-book/sw.js', { scope: '/Rec-book/' })
-                .then(reg => console.log('Offline Ready'))
-                .catch(err => console.log('Offline Setup failed', err));
+            navigator.serviceWorker.register('/Rec-book/sw.js', { scope: '/Rec-book/' });
         });
     }
 
+    // 2. Database Setup
     const db = new Dexie("FarmKeepFinalDB");
     db.version(1).stores({ records: '++id, category, name, tag, doc_name' });
 
     let currentCat = "";
 
+    // 3. Navigation
+    function showView(id) {
+        document.querySelectorAll('.container > div').forEach(d => d.classList.add('hidden'));
+        document.getElementById(id).classList.remove('hidden');
+        if(id === 'view-categories') updateCounters();
+    }
+
+    function goToHome() { showView('view-categories'); }
+
+    // 4. Counters
     async function updateCounters() {
         const cats = ['Cow', 'Bull', 'Buffalo', 'Calf', 'Other', 'Doctor'];
         for(let c of cats) {
@@ -141,14 +179,23 @@
         }
     }
 
-    function showView(id) {
-        document.querySelectorAll('.container > div').forEach(d => d.classList.add('hidden'));
-        document.getElementById(id).classList.remove('hidden');
-        if(id === 'view-categories') updateCounters();
+    // 5. Summary Report Logic
+    async function showSummary() {
+        const cats = ['Cow', 'Bull', 'Buffalo', 'Calf', 'Other'];
+        const body = document.getElementById('summary-body');
+        body.innerHTML = '';
+        let total = 0;
+
+        for (let c of cats) {
+            const count = await db.records.where('category').equals(c).count();
+            total += count;
+            body.innerHTML += `<tr><td>${c}s</td><td style="text-align:right;">${count}</td></tr>`;
+        }
+        document.getElementById('total-count').innerText = total;
+        showView('view-summary');
     }
 
-    function goToHome() { showView('view-categories'); }
-
+    // 6. List Rendering
     async function showList(cat) {
         currentCat = cat;
         document.getElementById('list-title').innerText = cat + " Records";
@@ -159,20 +206,21 @@
     async function renderList() {
         const q = document.getElementById('searchInput').value.toLowerCase();
         let data = await db.records.where('category').equals(currentCat).toArray();
-        if(q) data = data.filter(i => (i.name||"").toLowerCase().includes(q) || (i.tag||"").toLowerCase().includes(q) || (i.doc_name||"").toLowerCase().includes(q));
+        if(q) data = data.filter(i => (i.name||"").toLowerCase().includes(q) || (i.tag||"").toLowerCase().includes(q));
         
         const container = document.getElementById('items-container');
-        container.innerHTML = data.length ? '' : '<p style="text-align:center; padding:20px;">No records found.</p>';
+        container.innerHTML = data.length ? '' : '<p style="text-align:center;">No records.</p>';
         data.forEach(i => {
             const div = document.createElement('div');
             div.className = 'animal-card';
             div.onclick = () => showDetails(i.id);
-            const img = i.photo ? `<img src="${i.photo}">` : `<div style="width:50px;height:50px;background:#eee;border-radius:6px;margin-right:12px;display:flex;align-items:center;justify-content:center;">${currentCat==='Doctor'?'👨‍⚕️':'🐄'}</div>`;
+            const img = i.photo ? `<img src="${i.photo}">` : `<div style="width:50px;height:50px;background:#eee;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-right:12px;">🐄</div>`;
             div.innerHTML = `<div style="display:flex;align-items:center;">${img}<div><b>${i.category==='Doctor'?i.doc_name:i.name}</b><br><small>${i.category==='Doctor'?i.visit_date:i.tag}</small></div></div><span>❯</span>`;
             container.appendChild(div);
         });
     }
 
+    // 7. Details & Delete
     async function showDetails(id) {
         const i = await db.records.get(id);
         const card = document.getElementById('detail-card');
@@ -183,10 +231,11 @@
             card.innerHTML = `${img}<h2>${i.name}</h2><p><b>Tag:</b> ${i.tag} | <b>Breed:</b> ${i.breed}</p><div class="vax-section"><b>💉 Vaccination:</b> ${i.vax_name || 'None'} (${i.vax_date || 'N/A'})</div><p><b>Notes:</b> ${i.notes || '-'}</p>`;
         }
         document.getElementById('edit-btn').onclick = () => openForm(i);
-        document.getElementById('delete-btn').onclick = async () => { if(confirm("Delete?")) { await db.records.delete(id); showList(currentCat); }};
+        document.getElementById('delete-btn').onclick = async () => { if(confirm("Delete this record?")) { await db.records.delete(id); showList(currentCat); }};
         showView('view-details');
     }
 
+    // 8. Form Handling
     function openForm(item = null) {
         const f = document.getElementById('mainForm');
         f.reset();
@@ -227,12 +276,11 @@
                 const canvas = document.createElement('canvas');
                 const max = 600;
                 const scale = max / Math.max(img.width, img.height);
-                canvas.width = img.width * scale;
-                canvas.height = img.height * scale;
+                canvas.width = img.width * scale; canvas.height = img.height * scale;
                 canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-                const base64 = canvas.toDataURL('image/jpeg', 0.7);
-                document.getElementById('photo-data').value = base64;
-                document.getElementById('preview-img').src = base64;
+                const b64 = canvas.toDataURL('image/jpeg', 0.7);
+                document.getElementById('photo-data').value = b64;
+                document.getElementById('preview-img').src = b64;
                 document.getElementById('preview-img').classList.remove('hidden');
                 document.getElementById('photo-prompt').classList.add('hidden');
             };
@@ -247,34 +295,35 @@
         const data = {
             category: currentCat,
             photo: document.getElementById('photo-data').value,
-            name: document.getElementById('name').value,
-            tag: document.getElementById('tag').value,
-            breed: document.getElementById('breed').value,
-            sex: document.getElementById('sex').value,
-            vax_name: document.getElementById('vax_name').value,
-            vax_date: document.getElementById('vax_date').value,
-            doc_name: document.getElementById('doc_name').value,
-            visit_purpose: document.getElementById('visit_purpose').value,
-            visit_date: document.getElementById('visit_date').value,
-            notes: document.getElementById('notes').value
+            name: document.getElementById('name').value, tag: document.getElementById('tag').value,
+            breed: document.getElementById('breed').value, sex: document.getElementById('sex').value,
+            vax_name: document.getElementById('vax_name').value, vax_date: document.getElementById('vax_date').value,
+            doc_name: document.getElementById('doc_name').value, visit_purpose: document.getElementById('visit_purpose').value,
+            visit_date: document.getElementById('visit_date').value, notes: document.getElementById('notes').value
         };
         if(id) await db.records.update(Number(id), data);
         else await db.records.add(data);
         showList(currentCat);
     };
 
+    // 9. Backup & Restore
     async function exportData() {
         const d = await db.records.toArray();
         const a = document.createElement('a');
         a.href = URL.createObjectURL(new Blob([JSON.stringify(d)], {type:'application/json'}));
-        a.download = 'FarmKeep_Backup.json'; a.click();
+        a.download = `Gaushala_Backup_${new Date().toISOString().slice(0,10)}.json`;
+        a.click();
     }
 
     function importData(e) {
         const r = new FileReader();
         r.onload = async (ev) => {
-            await db.records.bulkAdd(JSON.parse(ev.target.result));
-            location.reload();
+            try {
+                const data = JSON.parse(ev.target.result);
+                await db.records.bulkAdd(data);
+                alert("Import Successful!");
+                location.reload();
+            } catch(err) { alert("Invalid Backup File"); }
         };
         r.readAsText(e.target.files[0]);
     }
