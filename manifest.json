@@ -1,23 +1,17 @@
 {
-  "background_color": "#ffffff",
-  "dir": "auto",
-  "display": "fullscreen",
-  "name": "ram",
-  "orientation": "any",
-  "scope": "/",
-  "short_name": "ram",
-  "start_url": "https://cavende.github.io/Rec-book/",
-  "theme_color": "#ffffff",
-  "id": "Ram",
-  "description": "butiful",
-  "display_override": [
-    "fullscreen",
-    "window-controls-overlay"
-  ],
-  "categories": [
-    "finance",
-    "personalization",
-    "productivity",
-    "utilities"
+  "name": "FarmKeep Pro",
+  "short_name": "FarmKeep",
+  "start_url": "/Rec-book/index.html",
+  "scope": "/Rec-book/",
+  "display": "standalone",
+  "background_color": "#f4f7f6",
+  "theme_color": "#ef6c00",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2396/2396628.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
   ]
 }
