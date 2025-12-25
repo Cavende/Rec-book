@@ -1,8 +1,8 @@
 {
-  "name": "kamdhenu Pro",
-  "short_name": "kamdhenu",
-  "start_url": "/kamdhenu-gaushala/index.html",
-  "scope": "/kamdhenu-gaushala/",
+  "name": "FramKeep Pro",
+  "short_name": "FramKeep",
+  "start_url": "/Rec-book/index.html",
+  "scope": "/Rec-book/",
   "display": "standalone",
   "background_color": "#f4f7f6",
   "theme_color": "#ef6c00",
