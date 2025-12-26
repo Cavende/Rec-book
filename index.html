@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="manifest" href="manifest.json">
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kamdhenu Gaushala Cloud</title>
@@ -14,14 +12,15 @@
         :root { --primary: #ef6c00; --accent: #2e7d32; --bg: #f4f7f6; --card-bg: #ffffff; --text: #212121; --danger: #d32f2f; --edit: #1976d2; }
         body { font-family: -apple-system, system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); }
         
+        /* Large Header Logo (100px) & Centered Text */
         header { 
-            background: var(--primary); color: white; padding: 0.8rem 1rem; 
+            background: var(--primary); color: white; padding: 1rem; 
             display: flex; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
         }
-        .header-logo { height: 100px; width: 100px; border-radius: 50%; border: 2px solid white; background: white; object-fit: cover; }
-        .header-text { text-align: center; flex-grow: 1; margin-right: 50px; }
-        header h1 { margin: 0; font-size: 1.2rem; }
-        header .subtitle { font-size: 0.7rem; opacity: 0.9; display: block; }
+        .header-logo { height: 100px; width: 100px; border-radius: 50%; border: 3px solid white; background: white; object-fit: cover; flex-shrink: 0; }
+        .header-text { text-align: center; flex-grow: 1; margin-right: 100px; /* Balances the logo on the left */ }
+        header h1 { margin: 0; font-size: 1.4rem; line-height: 1.2; }
+        header .subtitle { font-size: 0.8rem; opacity: 0.95; display: block; font-style: italic; margin-top: 4px; }
 
         .container { padding: 15px; max-width: 600px; margin: auto; padding-bottom: 60px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
@@ -35,7 +34,7 @@
         .btn { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1rem; font-weight: bold; margin-top: 10px; display: block; text-align: center; text-decoration: none; }
         .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
         .hidden { display: none !important; }
-        .admin-only { display: none; } /* Controlled by JS */
+        .admin-only { display: none; }
 
         /* Report Styles */
         .report-box { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -47,10 +46,18 @@
         .animal-card { background: var(--card-bg); padding: 12px; margin-bottom: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--primary); cursor: pointer; }
         .animal-card img { width: 50px; height: 50px; border-radius: 6px; object-fit: cover; margin-right: 12px; }
 
+        /* PRINT STYLES - 110px LOGO & FULL BRAND NAME */
         @media print {
+            body { background: white; }
             header, .btn, .search-box, .grid, .cat-card { display: none !important; }
-            #print-header { display: flex !important; align-items: center; border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
-            #print-header img { height: 80px; width: 80px; margin-right: 20px; }
+            .container { max-width: 100%; padding: 0; }
+            #print-header { display: flex !important; align-items: center; border-bottom: 4px solid var(--primary); padding-bottom: 20px; margin-bottom: 30px; }
+            #print-header img { height: 110px; width: 110px; margin-right: 25px; border-radius: 50%; border: 2px solid #ddd; background: white; }
+            #print-header h1 { margin: 0; color: var(--primary); font-size: 1.8rem; }
+            #print-header p { margin: 4px 0; font-size: 1.1rem; font-style: italic; color: #444; }
+            table { border: 1px solid #ddd; }
+            th { background: #f0f0f0 !important; border: 1px solid #ddd; }
+            td { border: 1px solid #ddd; }
         }
     </style>
 </head>
@@ -60,7 +67,7 @@
     <img src="https://i.postimg.cc/jSt9gWck/1000054629.png" class="header-logo">
     <div class="header-text">
         <h1>Kamdhenu Gaushala</h1>
-        <span class="subtitle">(Shriram Shaktipith Sansthan)</span>
+        <span class="subtitle">Bramhachari Someshwar Chaytanya Kalyankari Sanstha (BSCKS)</span>
     </div>
 </header>
 
@@ -88,17 +95,21 @@
         <div class="report-box">
             <div id="print-header" style="display:none;">
                 <img src="https://i.postimg.cc/jSt9gWck/1000054629.png">
-                <div><h1>Kamdhenu Gaushala</h1><p>Inventory Report</p></div>
+                <div>
+                    <h1>Kamdhenu Gaushala</h1>
+                    <p>Bramhachari Someshwar Chaytanya Kalyankari Sanstha (BSCKS)</p>
+                    <p><i>Official Inventory Report</i></p>
+                </div>
             </div>
-            <h2>Inventory Report</h2>
-            <p id="print-date"></p>
+            <h2 style="margin-top:0;">Inventory Report</h2>
+            <p id="print-date" style="font-size: 0.9rem; color: #666;"></p>
             <table>
                 <thead><tr><th>Category</th><th style="text-align:right;">Head Count</th></tr></thead>
                 <tbody id="summary-body"></tbody>
-                <tfoot><tr class="total-row"><td>TOTAL</td><td id="total-count" style="text-align:right;">0</td></tr></tfoot>
+                <tfoot><tr class="total-row"><td>TOTAL ANIMALS</td><td id="total-count" style="text-align:right;">0</td></tr></tfoot>
             </table>
         </div>
-        <button class="btn" style="background:var(--accent); margin-top: 25px;" onclick="window.print()">🖨️ Print Report</button>
+        <button class="btn" style="background:var(--accent); margin-top: 25px;" onclick="window.print()">🖨️ Print Official Report</button>
     </div>
 
     <div id="view-list" class="hidden">
@@ -159,41 +170,27 @@
     const db = firebase.database();
     const recordsRef = db.ref('records');
 
-    const ADMIN_PASS = "1008"; // ⬅️ SET YOUR PASSWORD HERE
+    const ADMIN_PASS = "1234";
     let isAdmin = false;
     let allRecords = {};
     let currentCat = "";
 
-    // Check "Remember Me" on Load
-    window.onload = () => {
-        if(localStorage.getItem('gaushalaAdmin') === 'true') {
-            setAdmin(true);
-        }
-    };
+    window.onload = () => { if(localStorage.getItem('gaushalaAdmin') === 'true') setAdmin(true); };
 
     function promptLogin() {
         const pass = prompt("Enter Admin Password:");
-        if(pass === ADMIN_PASS) {
-            setAdmin(true);
-            localStorage.setItem('gaushalaAdmin', 'true');
-            alert("Admin Access Granted");
-        } else if (pass !== null) {
-            alert("Wrong Password!");
-        }
+        if(pass === ADMIN_PASS) { setAdmin(true); localStorage.setItem('gaushalaAdmin', 'true'); }
+        else if (pass !== null) alert("Wrong Password!");
     }
 
     function setAdmin(status) {
         isAdmin = status;
-        const elements = document.querySelectorAll('.admin-only');
-        elements.forEach(el => el.style.display = status ? 'block' : 'none');
+        document.querySelectorAll('.admin-only').forEach(el => el.style.display = status ? 'block' : 'none');
         document.getElementById('login-trigger').classList.toggle('hidden', status);
         document.getElementById('logout-trigger').classList.toggle('hidden', !status);
     }
 
-    function logout() {
-        localStorage.removeItem('gaushalaAdmin');
-        location.reload();
-    }
+    function logout() { localStorage.removeItem('gaushalaAdmin'); location.reload(); }
 
     recordsRef.on('value', (snapshot) => {
         allRecords = snapshot.val() || {};
@@ -210,12 +207,21 @@
         document.getElementById(id).classList.remove('hidden');
     }
 
-    function showList(cat) {
-        currentCat = cat;
-        document.getElementById('list-title').innerText = cat + " Records";
-        renderList();
-        showView('view-list');
+    function showSummary() {
+        const cats = ['Cow', 'Bull', 'Buffalo', 'Calf', 'Other'];
+        const body = document.getElementById('summary-body');
+        document.getElementById('print-date').innerText = "Generated: " + new Date().toLocaleDateString('en-IN', {day:'2-digit', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit'});
+        body.innerHTML = ''; let total = 0;
+        cats.forEach(c => {
+            const count = Object.values(allRecords).filter(r => r.category === c).length;
+            total += count;
+            body.innerHTML += `<tr><td>${c}s</td><td style="text-align:right;">${count}</td></tr>`;
+        });
+        document.getElementById('total-count').innerText = total;
+        showView('view-summary');
     }
+
+    function showList(cat) { currentCat = cat; document.getElementById('list-title').innerText = cat + " Records"; renderList(); showView('view-list'); }
 
     function renderList() {
         const q = document.getElementById('searchInput').value.toLowerCase();
@@ -223,7 +229,6 @@
         container.innerHTML = '';
         let filtered = Object.entries(allRecords).filter(([id, r]) => r.category === currentCat);
         if(q) filtered = filtered.filter(([id, r]) => ((r.name||r.doc_name||"")+(r.tag||"")).toLowerCase().includes(q));
-        
         filtered.forEach(([id, r]) => {
             const div = document.createElement('div');
             div.className = 'animal-card';
@@ -302,7 +307,7 @@
 
     document.getElementById('mainForm').onsubmit = async (e) => {
         e.preventDefault();
-        if(!isAdmin) return alert("Please Login as Admin to Save");
+        if(!isAdmin) return alert("Login as Admin");
         const id = document.getElementById('edit-id').value;
         const data = { category: currentCat, notes: document.getElementById('notes').value };
         if(currentCat === 'Doctor') {
@@ -321,21 +326,7 @@
 
     async function deleteRecord(id) {
         if(!isAdmin) return;
-        if(confirm("Delete Record Permanently?")) { await recordsRef.child(id).remove(); showList(currentCat); }
-    }
-
-    function showSummary() {
-        const cats = ['Cow', 'Bull', 'Buffalo', 'Calf', 'Other'];
-        const body = document.getElementById('summary-body');
-        document.getElementById('print-date').innerText = "Date: " + new Date().toLocaleDateString();
-        body.innerHTML = ''; let total = 0;
-        cats.forEach(c => {
-            const count = Object.values(allRecords).filter(r => r.category === c).length;
-            total += count;
-            body.innerHTML += `<tr><td>${c}s</td><td style="text-align:right;">${count}</td></tr>`;
-        });
-        document.getElementById('total-count').innerText = total;
-        showView('view-summary');
+        if(confirm("Delete Permanently?")) { await recordsRef.child(id).remove(); showList(currentCat); }
     }
 
     function exportData() {
